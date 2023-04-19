@@ -1,17 +1,17 @@
 package cmd
 
 import (
+	"fmt"
+	"github.com/appleboy/CodeGPT/git"
+	"github.com/appleboy/CodeGPT/openai"
+	"github.com/appleboy/CodeGPT/prompt"
+	"github.com/appleboy/CodeGPT/util"
 	"html"
 	"os"
 	"path"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/appleboy/CodeGPT/git"
-	"github.com/appleboy/CodeGPT/openai"
-	"github.com/appleboy/CodeGPT/prompt"
-	"github.com/appleboy/CodeGPT/util"
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
@@ -90,8 +90,8 @@ var commitCmd = &cobra.Command{
 			return err
 		}
 
-		if len([]rune(diff)) > 4000 {
-			diff = string([]rune(diff)[:4000])
+		if len([]rune(diff)) > 6000 {
+			diff = fmt.Sprint(string([]rune(diff)[:6000]), "......")
 		}
 
 		out, err := util.GetTemplateByString(
