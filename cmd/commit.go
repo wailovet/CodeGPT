@@ -90,6 +90,10 @@ var commitCmd = &cobra.Command{
 			return err
 		}
 
+		if len([]rune(diff)) > 4000 {
+			diff = string([]rune(diff)[:4000])
+		}
+
 		out, err := util.GetTemplateByString(
 			prompt.SummarizeFileDiffTemplate,
 			util.Data{
